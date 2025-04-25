@@ -11,7 +11,6 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/qjfoidnh/BaiduPCS-Go/baidupcs"
 	"github.com/qjfoidnh/BaiduPCS-Go/pcstable"
-	"github.com/qjfoidnh/BaiduPCS-Go/pcsutil/converter"
 	"github.com/qjfoidnh/baidu-tools/tieba"
 )
 
@@ -68,7 +67,7 @@ func (baidu *Baidu) BaiduPCS() *baidupcs.BaiduPCS {
 // GetSavePath 根据提供的网盘文件路径 pcspath, 返回本地储存路径,
 // 返回绝对路径, 获取绝对路径出错时才返回相对路径...
 func (baidu *Baidu) GetSavePath(pcspath string) string {
-	dirStr := filepath.Join(Config.SaveDir, fmt.Sprintf("%d_%s", baidu.UID, converter.TrimPathInvalidChars(baidu.Name)), pcspath)
+	dirStr := filepath.Join(Config.SaveDir, pcspath)
 	dir, err := filepath.Abs(dirStr)
 	if err != nil {
 		dir = filepath.Clean(dirStr)
